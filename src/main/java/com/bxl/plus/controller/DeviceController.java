@@ -1,5 +1,6 @@
 package com.bxl.plus.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bxl.plus.entity.Device;
@@ -7,6 +8,7 @@ import com.bxl.plus.service.DeviceService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: 白小楼
@@ -76,4 +78,15 @@ public class DeviceController {
         return "删除成功!";
     }
 
+
+    /**
+     * excel表格导出
+     * 方法待完善
+     */
+    @GetMapping("/excel/export")
+    public void excelExport(){
+        List<Device> deviceList = deviceService.list();
+        deviceList.stream().forEach(System.out::println);
+
+    }
 }
