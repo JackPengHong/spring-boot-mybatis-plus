@@ -1,0 +1,35 @@
+server:
+  #端口
+  port: 8181
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource          #数据源类型
+    driver-class-name: com.mysql.cj.jdbc.Driver       #数据库驱动
+    url: jdbc:mysql://localhost:3306/self_test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: Root123
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长(毫秒),超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长(毫秒)超时则被释放（retired），默认:10分钟
+      pool-name: DateSourceHikariCP     # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长(毫秒),超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      connection-test-query: SELECT 1
+  #Springfox使用的路径匹配是基于AntPathMatcher
+  #Spring Boot使用的是PathPatternMatcher
+  #为了解决swagger2和springboot冲突问题
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+#配置日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #指定sql映射文件
+  mapper-locations: classpath:/org/bxl/mapper/xml/*.xml
+#  mapper-locations: classpath:/xml/*.xml
+
